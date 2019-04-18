@@ -1,5 +1,7 @@
 package Chrome;
 
+import Chrome.Bean.Historico;
+import Chrome.database.DAO.DAO;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.opera.OperaDriver;
@@ -13,8 +15,14 @@ public class ExecutarNavegador {
 
         executaOperaDriver();
         Pagina.acessarPagina(driver);
-        Pagina.preencherLogin("testeJoseph@gmail.com", "teste");
-        Pagina.changeImagem("C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\imagens\\2.png");
+        Pagina.fazerLogin("testeJoseph@gmail.com", "teste");
+        Pagina.mudarImagem("C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\imagens\\2.png");
+        String data = Pagina.pegarData();
+        String hora = Pagina.pegarHora();
+        Historico historico = new Historico(data, hora);
+        DAO.inserirHistorico(historico);
+        DAO.criarHistorico("C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\Historico.txt");
+
     }
 
     public static void executaChromeDriver(){
