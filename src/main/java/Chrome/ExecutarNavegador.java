@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
 
-public class ExecutarChrome {
+public class ExecutarNavegador {
 
     public static WebDriver driver;
 
@@ -13,8 +13,8 @@ public class ExecutarChrome {
 
         executaOperaDriver();
         Pagina.acessarPagina(driver);
-//        Pagina.preencherLogin("testeJoseph@gmail.com", "teste");
-//        Pagina.changeImagem("C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\imagens\\1.jpg");
+        Pagina.preencherLogin("testeJoseph@gmail.com", "teste");
+        Pagina.changeImagem("C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\imagens\\2.png");
     }
 
     public static void executaChromeDriver(){

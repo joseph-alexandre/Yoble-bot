@@ -2,14 +2,8 @@ package Chrome;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-
-import static Chrome.ExecutarChrome.driver;
+import static Chrome.ExecutarNavegador.driver;
 
 public class Pagina {
 
@@ -17,7 +11,7 @@ public class Pagina {
     public static void acessarPagina(WebDriver driver){
         String url;
         String titulo;
-        url = "file:///C:/Users/Usuario/Desktop/welcome.html";
+        url = "http://yoble.com.br";
         driver.get(url);
     }
 
