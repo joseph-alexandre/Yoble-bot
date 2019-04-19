@@ -1,9 +1,10 @@
-package Application;
+package Application.Bean;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 
+import javax.swing.*;
 import java.util.Calendar;
 
 
@@ -35,7 +36,7 @@ public class Pagina {
             driver.findElement(By.xpath("//input[@name='photo']")).sendKeys(path);
             driver.findElement(By.xpath("//input[@type='submit']")).click();
         } catch (InvalidArgumentException e) {
-            System.out.println("O arquivo não existe.");
+            JOptionPane.showMessageDialog(null, "Arquivo incorreto.");
         }
     }
 

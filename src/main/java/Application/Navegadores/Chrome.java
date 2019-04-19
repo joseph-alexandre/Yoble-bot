@@ -8,7 +8,7 @@ public class Chrome extends Navegador {
 
     private static final String CHROME_DRIVER_PATH = "C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\drivers\\chromedriver.exe";
     private static final String CHROME_DRIVER = "webdriver.chrome.driver";
-    private static final String CHROME_BINARY =  "C:\\Program Files (x86)\\Google\\Application\\Application\\chrome.exe";
+    private static final String CHROME_BINARY =  "C:\\Program Files (x86)\\Google\\ApplicationView\\ApplicationView\\chrome.exe";
     private WebDriver driver;
 
     public Chrome(WebDriver driver) {
