@@ -10,9 +10,8 @@ public class Principal {
 
     public static void main(String[] args) throws InterruptedException {
 
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
-        executor.scheduleWithFixedDelay(new ThreadApplication(), 0, 1, TimeUnit.HOURS);
-        executor.scheduleWithFixedDelay(new ThreadApplication(), 0, 1, TimeUnit.HOURS);
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleWithFixedDelay(new ThreadApplication(), 0, 7, TimeUnit.DAYS);
 
     }
 }

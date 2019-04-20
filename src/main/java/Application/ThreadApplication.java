@@ -3,8 +3,8 @@ package Application;
 import Application.Bean.Historico;
 import Application.Bean.Pagina;
 import Application.Database.DAO.DAO;
+import Application.Navegadores.Chrome;
 import Application.Navegadores.Navegador;
-import Application.Navegadores.Opera;
 import Application.Util.FileValidator;
 import org.openqa.selenium.WebDriver;
 
@@ -22,15 +22,15 @@ public class ThreadApplication implements Runnable{
 
     public void run() {
 
-        Navegador opera = new Opera();
-        WebDriver driver = ((Opera) opera).getDriver();
+        Navegador chrome = new Chrome();
+        WebDriver driver = ((Chrome) chrome).getDriver();
         Pagina pagina = new Pagina(driver);
         pagina.acessarPagina(driver);
 
         pagina.fazerLogin(USER_EMAIL, USER_PASSWORD);
 
-        boolean controle = true;
-        while (controle) {
+
+
             String choice = JOptionPane.showInputDialog("Informe o nome do arquivo.");
 
             if (FileValidator.verificaExistenciaArquivo(PATH_IMAGES_FOLDER + choice + EXTENSION_PNG) == true) {
@@ -40,7 +40,6 @@ public class ThreadApplication implements Runnable{
                 Historico historico = new Historico(data, hora);
                 DAO.inserirHistorico(historico);
                 DAO.criarHistorico(PATH + "Historico.txt");
-                controle = false;
             } else {
                 JOptionPane.showMessageDialog(null, "Arquivo não encontrado.");
             }
@@ -48,4 +47,4 @@ public class ThreadApplication implements Runnable{
         }
     }
 
-}
+
