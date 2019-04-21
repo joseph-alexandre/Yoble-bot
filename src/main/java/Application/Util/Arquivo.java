@@ -2,9 +2,10 @@ package Application.Util;
 
 import java.io.File;
 
-public class FileValidator {
+public class Arquivo {
 
     private static String PATH_IMAGES_FOLDER = "C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\" + "imagens\\";
+    private static String PATH_TESTE_FOLDER = "C:\\Users\\Usuario\\Desktop\\Batata\\";
 
     public static boolean verificaExistenciaArquivo(String path){
         File arquivo = new File(path);
@@ -13,9 +14,7 @@ public class FileValidator {
         }
         return false;
     }
-    public static void proximoAvatar(){
 
-    }
 
     public static int getQuantidadeArquivos(String path){
         File file = new File(PATH_IMAGES_FOLDER);
@@ -23,11 +22,16 @@ public class FileValidator {
         return count;
     }
 
-    public static void main(String[] args) {
-
-        System.out.println(getQuantidadeArquivos(PATH_IMAGES_FOLDER));
-
+    public static String getArquivoSemExtensao(String path){
+        File file = new File(path);
+        String arquivo = file.getName().substring(0,1);
+        return arquivo;
     }
 
+    public static void main(String[] args) {
 
+        File arq = new File(PATH_TESTE_FOLDER);
+        File arquivos[] = arq.listFiles();
+        System.out.println(arquivos[0].getName());
+    }
 }

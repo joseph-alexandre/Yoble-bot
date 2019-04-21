@@ -5,12 +5,9 @@ import Application.Bean.Pagina;
 import Application.Database.DAO.DAO;
 import Application.Navegadores.Chrome;
 import Application.Navegadores.Navegador;
-import Application.Util.FileValidator;
 import org.openqa.selenium.WebDriver;
 
-import javax.swing.*;
-
-public class ThreadApplication implements Runnable{
+public class ThreadApplication implements Runnable {
 
     private static String PATH = "C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\";
     private static String PATH_IMAGES_FOLDER = "C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\" + "imagens\\";
@@ -30,21 +27,22 @@ public class ThreadApplication implements Runnable{
         pagina.fazerLogin(USER_EMAIL, USER_PASSWORD);
 
 
+        String data = pagina.pegarData();
+        String hora = pagina.pegarHora();
 
-            String choice = JOptionPane.showInputDialog("Informe o nome do arquivo.");
-
-            if (FileValidator.verificaExistenciaArquivo(PATH_IMAGES_FOLDER + choice + EXTENSION_PNG) == true) {
-                pagina.mudarImagem(PATH_IMAGES_FOLDER + choice + EXTENSION_PNG);
-                String data = pagina.pegarData();
-                String hora = pagina.pegarHora();
-                Historico historico = new Historico(data, hora);
-                DAO.inserirHistorico(historico);
-                DAO.criarHistorico(PATH + "Historico.txt");
-            } else {
-                JOptionPane.showMessageDialog(null, "Arquivo não encontrado.");
-            }
-
+        if (DAO.temRegistro() == false) {
+            pagina.adicionarPrimeiroAvatar(PATH_IMAGES_FOLDER);
+        } else {
+            pagina.mudarImagem(PATH_IMAGES_FOLDER);
+            Historico historico = new Historico(data, hora);
+            historico.setArquivoAtual(pagina.getAvatarAtual());
+            System.out.println(pagina.getAvatarAtual());
+            DAO.inserirHistorico(historico);
+            DAO.criarHistorico(PATH + "Historico.txt");
         }
+
+
     }
+}
 
 

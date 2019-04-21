@@ -32,3 +32,12 @@ target/
 
 #Gitignore
 .gitignore
+
+#database
+*.db
+*.png
+
+#Histórico
+src/main/resources/
+*.txt
+

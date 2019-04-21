@@ -23,7 +23,7 @@ public class Chrome extends Navegador {
 
     public void executarNavegador() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+//        options.addArguments("--headless");
         options.setBinary(CHROME_BINARY);
         System.setProperty(CHROME_DRIVER, CHROME_DRIVER_PATH);
         driver = new ChromeDriver(options);

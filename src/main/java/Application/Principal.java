@@ -11,7 +11,7 @@ public class Principal {
     public static void main(String[] args) throws InterruptedException {
 
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleWithFixedDelay(new ThreadApplication(), 0, 7, TimeUnit.DAYS);
+        executor.scheduleWithFixedDelay(new ThreadApplication(), 0, 5, TimeUnit.SECONDS);
 
     }
 }

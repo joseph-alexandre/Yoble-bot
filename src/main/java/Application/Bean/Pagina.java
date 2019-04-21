@@ -1,20 +1,26 @@
 package Application.Bean;
 
+import Application.Database.DAO.DAO;
+import Application.Util.Arquivo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.Calendar;
 
 
 public class Pagina {
 
-
+    private String avatarAtual;
     private static WebDriver driver;
 
     public Pagina(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public Pagina() {
     }
 
     public void acessarPagina(WebDriver driver) {
@@ -33,27 +39,62 @@ public class Pagina {
 
         try {
             driver.findElement(By.xpath("//p[1]")).click();
-            driver.findElement(By.xpath("//input[@name='photo']")).sendKeys(path);
+            int i = 0;
+            File arq = new File(path);
+            File arquivos[] = arq.listFiles();
+
+            while (i != arquivos.length) {
+                    int arquivoPosicao = Integer.parseInt(Arquivo.getArquivoSemExtensao(DAO.getAvatarAtual()));
+                    System.out.println(arquivoPosicao);
+                    String nome = arquivos[arquivoPosicao + i].getName();
+                    driver.findElement(By.xpath("//input[@name='photo']")).sendKeys(path + nome);
+                    setAvatarAtual(nome);
+                    System.out.println("Avatar atual: " + nome);
+                    i++;
+                    break;
+                }
+
+
             driver.findElement(By.xpath("//input[@type='submit']")).click();
+            System.out.println("Avatar trocado.");
         } catch (InvalidArgumentException e) {
             JOptionPane.showMessageDialog(null, "Arquivo incorreto.");
         }
     }
 
-    public String pegarData(){
-        Calendar date =  Calendar.getInstance();
+    public String pegarData() {
+        Calendar date = Calendar.getInstance();
         String data = date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH) + 1) + "/" + date.get(Calendar.YEAR);
         return data;
     }
 
-    public String pegarHora(){
-        Calendar date =  Calendar.getInstance();
+    public String pegarHora() {
+        Calendar date = Calendar.getInstance();
         String hora = date.get(Calendar.HOUR_OF_DAY) + ":" + date.get(Calendar.MINUTE);
         return hora;
     }
 
+    public String getAvatarAtual() {
+        return avatarAtual;
+    }
 
+    public void setAvatarAtual(String avatarAtual) {
+        this.avatarAtual = avatarAtual;
+    }
 
-
+    public void adicionarPrimeiroAvatar(String path){
+        driver.findElement(By.xpath("//p[1]")).click();
+        File arq = new File(path);
+        File arquivos[] = arq.listFiles();
+        DAO.inserirPrimeiroAvatar(pegarData(), pegarHora(), arquivos[0].getName());
+        driver.findElement(By.xpath("//input[@name='photo']")).sendKeys(path + arquivos[0].getName());
+        setAvatarAtual(arquivos[0].getName());
+        driver.findElement(By.xpath("//input[@type='submit']")).click();
+        System.out.println("Avatar trocado.");
+    }
+    public static void main(String[] args) {
+        int arquivoPosicao = Integer.parseInt(Arquivo.getArquivoSemExtensao(DAO.getAvatarAtual()));
+        System.out.println(arquivoPosicao);
+    }
 }
 
