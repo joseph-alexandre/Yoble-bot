@@ -13,9 +13,6 @@ public class ThreadApplication implements Runnable {
     private static String PATH_IMAGES_FOLDER = "C:\\Users\\Usuario\\Desktop\\Workspace\\yoble\\src\\main\\resources\\" + "imagens\\";
     private static String USER_EMAIL = "testeJoseph@gmail.com";
     private static String USER_PASSWORD = "teste";
-    private static String EXTENSION_JPG = ".jpg";
-    private static String EXTENSION_JPEG = ".jpeg";
-    private static String EXTENSION_PNG = ".png";
 
     public void run() {
 
@@ -36,7 +33,6 @@ public class ThreadApplication implements Runnable {
             pagina.mudarImagem(PATH_IMAGES_FOLDER);
             Historico historico = new Historico(data, hora);
             historico.setArquivoAtual(pagina.getAvatarAtual());
-            System.out.println(pagina.getAvatarAtual());
             DAO.inserirHistorico(historico);
             DAO.criarHistorico(PATH + "Historico.txt");
         }

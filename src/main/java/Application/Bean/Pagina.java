@@ -42,17 +42,19 @@ public class Pagina {
             int i = 0;
             File arq = new File(path);
             File arquivos[] = arq.listFiles();
-
             while (i != arquivos.length) {
-                    int arquivoPosicao = Integer.parseInt(Arquivo.getArquivoSemExtensao(DAO.getAvatarAtual()));
-                    System.out.println(arquivoPosicao);
-                    String nome = arquivos[arquivoPosicao + i].getName();
-                    driver.findElement(By.xpath("//input[@name='photo']")).sendKeys(path + nome);
-                    setAvatarAtual(nome);
-                    System.out.println("Avatar atual: " + nome);
-                    i++;
-                    break;
-                }
+                int arquivoPosicao = Integer.parseInt(Arquivo.getArquivoSemExtensao(DAO.getAvatarAtual()));
+                String nome = arquivos[arquivoPosicao + i].getName();
+                driver.findElement(By.xpath("//input[@name='photo']")).sendKeys(path + nome);
+                setAvatarAtual(nome);
+                System.out.println("Avatar atual: " + nome);
+                i++;
+                break;
+            }
+            System.out.println(i);
+            if (i >= arq.listFiles().length) {
+                System.out.println("Não há mais avatares a serem trocados.");
+            }
 
 
             driver.findElement(By.xpath("//input[@type='submit']")).click();
@@ -91,10 +93,10 @@ public class Pagina {
         setAvatarAtual(arquivos[0].getName());
         driver.findElement(By.xpath("//input[@type='submit']")).click();
         System.out.println("Avatar trocado.");
+        System.out.println("Avatar atual: " + arquivos[0].getName());
     }
     public static void main(String[] args) {
-        int arquivoPosicao = Integer.parseInt(Arquivo.getArquivoSemExtensao(DAO.getAvatarAtual()));
-        System.out.println(arquivoPosicao);
+
     }
 }
 

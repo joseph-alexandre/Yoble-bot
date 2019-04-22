@@ -28,10 +28,4 @@ public class Arquivo {
         return arquivo;
     }
 
-    public static void main(String[] args) {
-
-        File arq = new File(PATH_TESTE_FOLDER);
-        File arquivos[] = arq.listFiles();
-        System.out.println(arquivos[0].getName());
-    }
 }
